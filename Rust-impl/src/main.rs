@@ -15,7 +15,7 @@ impl Service for Microservice {
     type Request = Request;
     type Response = Response;
     type Error = hyper::Error;
-    type Futre = Box<Future<Item = Self::Response, Error = Self::Error>>;
+    type Future = Box<dyn Future<Item = Self::Response, Error = Self::Error>>;
 
     fn call(&self, request: Request) -> Self::Future {
         info!("Microservice recieved a request: {:?}", request);
@@ -23,3 +23,7 @@ impl Service for Microservice {
     }
 }
 
+fn main() {
+    env_logger::init();
+
+}
